@@ -1,0 +1,62 @@
+
+<div class="row">
+  <div class="page-header">
+      <h1>Latest Posts</h1>
+  </div>
+  <div class="alert alert-danger" ng-show="showAlertNotLogged" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     You must be <strong>logged in</strong> to upvote/downvote posts
+  </div>
+  <div class="alert alert-success" ng-show="showAlertSuccesful" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Success!</strong> You have been signed in successfully!
+  </div>
+  <div ng-repeat="post in posts | orderBy:'-upvotes'" class="col-md-12">
+        <span class="glyphicon glyphicon-thumbs-up" ng-style="{color:checkVotes(postUpvotes, post._id) ? 'green' : null}"
+              ng-click="upVote(post)"></span>
+        <span class="glyphicon glyphicon-thumbs-down" ng-style="{color:checkVotes(postDownvotes, post._id) ? 'red' : null}"
+              ng-click="downVote(post)"></span>
+      {{post.upvotes}}
+        <span style="font-size:20px; margin-left:10px;">
+          <a ng-show="post.link" href="{{post.link}}" target="_blank">
+            {{post.title}}
+          </a>
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </span>
+        <span ng-show="post.author">
+          posted by {{post.author | capitalize}}
+        </span>
+        <span style="font-size:16px; margin-right:6px;">
+          <a href="#/post/{{post._id}}">Comments<span class="badge" style="font-size:10px; margin-left:8px;">{{post.comments.length}}</span></a>
+        </span>
+  </div>
+
+
+  <form ng-submit="addPost()" class="col-md-6"
+        style="margin-top:30px;" ng-show="isLoggedIn()">
+    <h3>Add a new Link</h3>
+
+    <div class="form-group">
+      <input type="text"
+             class="form-control"
+             placeholder="Title"
+             ng-model="titleToAdd" />
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon3">http://</span>
+      <input type="text" class="form-control" placeholder="Link" ng-model="link" aria-describedby="basic-addon3">
+    </div>
+    <button type="submit" class="btn btn-primary">Post it!</button>
+  </form>
+</div>
+
+
+<div class="jumbotron" ng-hide="isLoggedIn()" ng-controller="navController">
+  <h1>Want to participate?</h1>
+  <p>Join our community NOW!</p>
+  <p><a class="btn btn-primary btn-lg" href="/#/register" role="button">Register</a>
+    <a class="btn btn-primary btn-lg" href="/#/login" role="button">Login</a></p>
+
+</div>

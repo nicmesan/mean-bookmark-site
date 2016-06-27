@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>
+            <a href={{post.link}} ng-show="post.link" target="_blank">{{post.title}}</a>
+            <span ng-hide="post.link">{{post.title}}</span>
+        </h3>
+        <div class="alert alert-danger" ng-show="showAlert" role="alert">You must be logged in to upvote/downvote posts</div>
+        <div ng-repeat="comment in post.comments | orderBy: '-upvotes'" >
+            <span class="glyphicon glyphicon-thumbs-up upvoteIcon"
+                  ng-click="upvoteComment($event, comment, $index)"></span>
+        <span class="glyphicon glyphicon-thumbs-down downvoteIcon"
+              ng-click="downvoteComment($event, comment, $index)"></span>
+            {{comment.upvotes}}
+            <span style="font-size:15px; margin-left:10px;">
+              {{comment.body}}
+            </span><br />
+           <span style="font-size:12px;">by {{comment.author}}</span><hr/>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <form ng-submit="addComment()"
+              style="margin-top:30px;" ng-show="isLoggedIn()">
+            <h4>{{userName | capitalize}}, add a new comment</h4>
+
+            <div class="form-group">
+                <textarea type="text"
+                       class="form-control"
+                       placeholder="Comment"
+                       ng-model="userComment" ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Comment!</button>
+        </form>
+    </div>
+</div>
+<a href="/#/home"><span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+<div class="jumbotron" ng-hide="isLoggedIn()" ng-controller="navController">
+    <h1>Want to participate?</h1>
+    <p>Join our community NOW!</p>
+    <p><a class="btn btn-primary btn-lg" href="/#/register" role="button">Register</a>
+        <a class="btn btn-primary btn-lg" href="/#/login" role="button">Login</a></p>
+
+</div>

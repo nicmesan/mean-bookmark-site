@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>My Bookmark Site</title>
+        <script src="main.js"></script>
+        <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body ng-app="mainApp">
+    <div class="container">
+        <div class="header clearfix">
+            <nav  ng-controller="navController">
+                <ul class="nav nav-pills pull-right">
+                    <li ng-show="isLoggedIn()" class="active"><a>Hello {{ currentUser() | capitalize }}!</a></li>
+                    <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+                    <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
+                    <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+                </ul>
+            </nav>
+            <h1>Bookmark Site</h1>
+        </div>
+
+        <div>
+                <ui-view></ui-view>
+        </div>
+    </div>
+
+</body>
+</html>

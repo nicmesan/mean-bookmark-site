@@ -1,0 +1,23 @@
+<div class="row">
+    <form ng-submit="logIn()" class="col-md-6"
+          style="margin-top:30px;">
+        <span ng-show="error">{{error.message}}</span>
+        <h2>Login Page</h2>
+
+        <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Username"
+                   ng-model="user.username" />
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   class="form-control"
+                   placeholder="Password"
+                   ng-model="user.password" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+<a href="/#/home"><span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+
